@@ -5,4 +5,4 @@ Welcome.
 Welcome too!
 Remember it?
 
-![workflow](https://github.com/<UserName>/<RepositoryName>/actions/workflows/main.yml/badge.svg)
+![workflow](https://github.com/https://github.com/min-thu-myat/devops/actions/workflows/main.yml/badge.svg)
