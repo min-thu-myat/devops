@@ -15,14 +15,20 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
 
-      - name: Compile with Maven
-        run: mvn compile
+      - name: Setup network & MongoDB
+        run: |
+          docker network create --driver bridge se-methods
+          docker pull mongo
+          docker run -d --name mongo-dbserver --network se-methods mongo
+
+      - name: Build with Maven
+        run: mvn package
 
       - name: Build Docker Image
         run: docker build -t devopsimage .
 
       - name: Run image
-        run: docker run --name devopscontainer -d devopsimage
+        run: docker run --network se-methods --name devopscontainer devopsimage
 
       - name: view logs
         run: docker logs devopscontainer
