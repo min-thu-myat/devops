@@ -1,4 +1,4 @@
 FROM eclipse-temurin:21-jre
-COPY ./target/seMethods-1.0-SNAPSHOT-jar-with-dependencies.jar /tmp/
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "seMethods-1.0-SNAPSHOT-jar-with-dependencies.jar"]
+COPY target/seMethods-1.0-SNAPSHOT-jar-with-dependencies.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
