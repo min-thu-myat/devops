@@ -1,3 +1,4 @@
+version: '3'
 services:
   app:
     build: .
@@ -5,10 +6,7 @@ services:
       - db
 
   db:
-    image: mysql:latest
-    container_name: db
-    environment:
-      MYSQL_ROOT_PASSWORD: "example"
-      MYSQL_DATABASE: "employees"
+    build: db/.
+    restart: always
     ports:
-      - "3306:3306"
+      - "33060:3306"
