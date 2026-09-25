@@ -1,0 +1,45 @@
+@startuml
+' Layout adjustment for cleaner horizontal rendering
+left to right direction
+skinparam packageStyle rectangle
+
+actor "HR Advisor" as HR
+actor "HR Manager" as Manager
+
+rectangle Database
+
+rectangle "HR System" {
+    ' Core Use Cases (User Stories)
+    usecase UC1 as "UC1: Get all employee salaries"
+    usecase UC2 as "UC2: Get salaries by department"
+    usecase UC3 as "UC3: Get salaries by role"
+    usecase UC4 as "UC4: Get salaries by title"
+
+    ' Sub-routines / Included Use Cases
+    usecase UCa as "Print salary report"
+    usecase UCb as "Format currency & output"
+
+    ' Actor Associations
+    HR -- UC1
+    HR -- UC2
+    HR -- UC3
+    HR -- UC4
+
+    Manager -- UC1
+    Manager -- UC2
+
+    ' System Inclusions (<<include>>)
+    UC1 ..> UCa : <<include>>
+    UC2 ..> UCa : <<include>>
+    UC3 ..> UCa : <<include>>
+    UC4 ..> UCa : <<include>>
+
+    UCa ..> UCb : <<include>>
+
+    ' Database Dependencies
+    UC1 -- Database
+    UC2 -- Database
+    UC3 -- Database
+    UC4 -- Database
+}
+@enduml

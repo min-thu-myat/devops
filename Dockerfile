@@ -1,4 +1,9 @@
 FROM eclipse-temurin:21-jre
+
 WORKDIR /tmp
-COPY target/seMethods-0.1.0.3-jar-with-dependencies.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Using a wildcard *-jar-with-dependencies.jar prevents you from having
+# to update the Dockerfile every time you change your version in pom.xml!
+COPY target/*-jar-with-dependencies.jar /tmp/seMethods.jar
+
+ENTRYPOINT ["java", "-jar", "/tmp/seMethods.jar"]
