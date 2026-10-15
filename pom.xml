@@ -20,6 +20,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.18</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.1.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -39,7 +46,6 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <!-- Updated to match package com.napier.sem and class App -->
                             <mainClass>com.napier.sem.App</mainClass>
                         </manifest>
                     </archive>
@@ -56,6 +62,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
             </plugin>
         </plugins>
     </build>
