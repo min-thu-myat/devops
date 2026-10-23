@@ -22,7 +22,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
       - name: Unit Tests
-        run: mvn -Dtest=com.napier.sem.AppTest test
+        run: mvn -Dtest=com.napier.devops.AppTest test
 
   IntegrationTests:
     name: Integration Tests
