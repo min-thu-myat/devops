@@ -4,7 +4,6 @@ import com.napier.sem.App;
 import com.napier.sem.Employee;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 
@@ -29,22 +28,22 @@ public class AppTest
     @Test
     void printSalariesTestEmpty()
     {
-        ArrayList<Employee> employess = new ArrayList<Employee>();
-        app.printSalaries(employess);
+        ArrayList<Employee> employees = new ArrayList<>();
+        app.printSalaries(employees);
     }
 
     @Test
     void printSalariesTestContainsNull()
     {
-        ArrayList<Employee> employess = new ArrayList<Employee>();
-        employess.add(null);
-        app.printSalaries(employess);
+        ArrayList<Employee> employees = new ArrayList<>();
+        employees.add(null);
+        app.printSalaries(employees);
     }
 
     @Test
-    void printSalaries()
+    void printSalariesTestValid()
     {
-        ArrayList<Employee> employees = new ArrayList<Employee>();
+        ArrayList<Employee> employees = new ArrayList<>();
         Employee emp = new Employee(1, "Kevin", "Chalmers", 55000);
         employees.add(emp);
         app.printSalaries(employees);
@@ -53,14 +52,12 @@ public class AppTest
     @Test
     void displayEmployeeTestNull()
     {
-        // Test behavior when passing a null employee
         app.displayEmployee(null);
     }
 
     @Test
     void displayEmployeeTestValid()
     {
-        // Test behavior with a fully populated valid employee
         Employee emp = new Employee(1, "Kevin", "Chalmers", 55000);
         app.displayEmployee(emp);
     }

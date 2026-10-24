@@ -4,9 +4,6 @@ import com.napier.sem.App;
 import com.napier.sem.Employee;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,15 +16,17 @@ public class AppIntegrationTest
     {
         app = new App();
         app.connect("localhost:33060", 30000);
-
     }
 
     @Test
     void testGetEmployee()
     {
-        Employee emp = app.getEmployee(255530);
-        assertEquals(emp.getEmp_no(), 255530);
-        assertEquals(emp.getFirst_name(), "Ronghao");
-        assertEquals(emp.getLast_name(), "Garigliano");
+        Employee emp = app.getEmployee(10001);
+
+        assertNotNull(emp, "Employee should not be null from the database");
+
+        assertEquals(emp.getEmp_no(), 10001);
+        assertEquals(emp.getFirst_name(), "Georgi");
+        assertEquals(emp.getLast_name(), "Facello");
     }
 }
