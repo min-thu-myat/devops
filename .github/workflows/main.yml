@@ -42,8 +42,8 @@ jobs:
           docker build -t database ./db
           docker run --name employees -dp 33060:3306 database
           
-          echo "Waiting for database to be fully ready..."
-          sleep 15
+          echo "Waiting 40 seconds for database container to initialize..."
+          sleep 40
           
           mvn -Dtest=com.napier.devops.AppIntegrationTest test
           
