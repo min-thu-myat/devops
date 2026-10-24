@@ -40,31 +40,20 @@ jobs:
       - name: Integration Tests
         run: |
           docker build -t database ./db
-          # Added -e MYSQL_ROOT_PASSWORD=example below
           docker run --name employees -e MYSQL_ROOT_PASSWORD=example -dp 33060:3306 database
           
-          # Give it a few seconds to see if it stays running
-          sleep 10
-          
-          # Check if container is still running, if not print logs and exit
-          if [ ! "$(docker ps -q -f name=employees)" ]; then
-              echo "Container died! Printing container logs:"
-              docker logs employees
-              exit 1
-          fi
-          
-          echo "Waiting for MySQL to be ready..."
-          until docker exec employees mysqladmin ping -h"localhost" -uroot -pexample --silent; do
-              echo "MySQL is unavailable - sleeping..."
+          echo "Waiting for the 'employees' database to be fully imported..."
+          until docker exec employees mysql -uroot -pexample -e "USE employees;" 2>/dev/null; do
+              echo "Database is still importing - sleeping..."
               sleep 3
           done
           
+          echo "Database is ready! Running integration tests..."
           mvn -Dtest=com.napier.devops.AppIntegrationTest test
           
           docker stop employees
           docker rm employees
           docker image rm database
-
   build:
     name: Build and Start Using docker-compose
     runs-on: ubuntu-22.04
