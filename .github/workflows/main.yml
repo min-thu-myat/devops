@@ -42,14 +42,21 @@ jobs:
           docker build -t database ./db
           docker run --name employees -dp 33060:3306 database
           
+          # Give it a few seconds to see if it stays running
+          sleep 10
+          
+          # Check if container is still running, if not print logs and exit
+          if [ ! "$(docker ps -q -f name=employees)" ]; then
+              echo "Container died! Printing container logs:"
+              docker logs employees
+              exit 1
+          fi
+          
           echo "Waiting for MySQL to be ready..."
           until docker exec employees mysqladmin ping -h"localhost" -uroot -pexample --silent; do
-            echo "MySQL is unavailable - sleeping..."
-            sleep 3
+              echo "MySQL is unavailable - sleeping..."
+              sleep 3
           done
-          
-          echo "MySQL responded to ping, waiting 5s for socket port to bind..."
-          sleep 5
           
           mvn -Dtest=com.napier.devops.AppIntegrationTest test
           
